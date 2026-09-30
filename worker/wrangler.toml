@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 SnapKitty Collective
+#
+# Wrangler config for the command-center API gateway.
+#
+# TUNNEL_BASE below is a plain (non-secret) variable: it is only the internal
+# tunnel hostname, which is useless without passing the Cloudflare Access
+# service-token screen. The actual secrets are set with:
+#   wrangler secret put APP_SECRET
+#   wrangler secret put CF_CLIENT_ID
+#   wrangler secret put CF_CLIENT_SECRET
+# Never commit real secret values to this file.
+
+name = "command-center-gateway"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Non-secret: the internal tunnel hostname for Ollama. Protected by the
+# Access service-token policy, so the hostname alone grants nothing.
+[vars]
+TUNNEL_BASE = "https://ollama-internal.yourdomain.com"

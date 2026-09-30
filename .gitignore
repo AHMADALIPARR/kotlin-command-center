@@ -1,0 +1,19 @@
+# Gradle / build outputs
+.gradle/
+build/
+out/
+*.class
+
+# Wrapper jar (regenerate with `gradle wrapper` on your machine)
+gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# Local secrets — never commit
+local.properties
+*.jks
+*.keystore
+.env

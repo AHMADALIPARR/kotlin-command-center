@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 SnapKitty Collective
+#
+# cloudflared tunnel ingress template for the Kotlin Command Center.
+# Placeholders only — setup.sh renders this with your real tunnel UUID.
+# Copy to /etc/cloudflared/config.yml on the server.
+
+tunnel: TUNNEL_UUID
+credentials-file: /etc/cloudflared/TUNNEL_UUID.json
+
+ingress:
+  # Ollama API behind the Worker gateway (internal hostname; the Worker
+  # attaches the Cloudflare Access service token, so no browser login needed).
+  - hostname: ollama-internal.yourdomain.com
+    service: http://localhost:11434
+  # SSH over WebSocket for the Kotlin app's JSch bridge.
+  - hostname: ssh.yourdomain.com
+    service: ssh://localhost:22
+  # Catch-all: refuse anything else.
+  - service: http_status:404
