@@ -24,12 +24,9 @@ dependencies {
     // SSH — maintained fork of JSch
     implementation("com.github.mwiede:jsch:$jschVersion")
 
-    // Test-only: embedded HTTP + WebSocket servers to prove the client and
-    // the SSH-over-WebSocket bridge against real sockets on localhost.
-    testImplementation("io.ktor:ktor-server-core:$ktorVersion")
-    testImplementation("io.ktor:ktor-server-cio:$ktorVersion")
-    testImplementation("io.ktor:ktor-server-websockets:$ktorVersion")
-    testImplementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+    // Test-only: MockEngine stands in for the Worker gateway and a fake
+    // ClientWebSocketSession stands in for the SSH tunnel, so the suite
+    // needs no live TCP sockets (this sandbox blocks JVM loopback).
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
